@@ -11,9 +11,9 @@
         <version>7</version>
     </parent>
 
-    <groupId>com.homeaway.oss</groupId>
+    <groupId>com.homeaway</groupId>
     <artifactId>oss-parent</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
@@ -25,8 +25,7 @@
     </distributionManagement>
     -->
 
-    <!-- TODO: needed by Sonatype for OSS stuff-->
-    <url></url>
+    <url>http://homeaway.github.io/</url>
 
     <licenses>
         <license>
@@ -53,7 +52,10 @@
     </scm>
 
     <properties>
-        <compilerVersion>1.6</compilerVersion>
+        <github.global.server>github</github.global.server>
+
+        <sourceVersion>1.6</sourceVersion>
+        <targetVersion>1.6</targetVersion>
     </properties>
 
     <build>
@@ -63,30 +65,23 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
-                    <source>${compilerVersion}</source>
-                    <target>${compilerVersion}</target>
+                    <source>${sourceVersion}</source>
+                    <target>${targetVersion}</target>
                 </configuration>
             </plugin>
             <plugin>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>1.1.1</version>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.8</version>
+                <configuration>
+                    <message>Creating site for ${project.version}</message>
+                </configuration>
                 <executions>
                     <execution>
-                        <id>enforce-plugin-versions</id>
                         <goals>
-                            <goal>enforce</goal>
+                            <goal>site</goal>
                         </goals>
-                        <configuration>
-                            <rules>
-                                <requirePluginVersions>
-                                    <message>You MUST always define plugin versions!</message>
-                                    <banLatest>false</banLatest>
-                                    <banRelease>true</banRelease>
-                                    <banSnapshots>false</banSnapshots>
-                                    <phases>clean,test,install,deploy,site-deploy</phases>
-                                </requirePluginVersions>
-                            </rules>
-                        </configuration>
+                        <phase>site</phase>
                     </execution>
                 </executions>
             </plugin>
