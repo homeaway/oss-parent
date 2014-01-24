@@ -22,3 +22,5 @@ Make sure that you do the following:
       <password>password</password>
     </server>
   ```
+* Generate a gpg key-pair as described [here](https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven)
+* Be sure to distribute your public key to the server listed.
