@@ -47,7 +47,7 @@
 
     <scm>
         <connection>scm:git:git@github.com:homeaway/oss-parent.git</connection>
-        <developerConnection>scm:git:git@ithub.com:homeaway/oss-parent.git</developerConnection>
+        <developerConnection>scm:git:git@github.com:homeaway/oss-parent.git</developerConnection>
         <url>git@github.com:homeaway/oss-parent.git</url>
     </scm>
 
