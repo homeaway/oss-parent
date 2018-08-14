@@ -1,143 +1,219 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>7</version>
-    </parent>
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
 
-    <groupId>com.homeaway</groupId>
-    <artifactId>oss-parent</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+	<groupId>com.homeaway</groupId>
+	<artifactId>oss-parent</artifactId>
+	<version>2.0.0-SNAPSHOT</version>
 
-    <packaging>pom</packaging>
+	<packaging>pom</packaging>
 
-    <name>HomeAway OSS Parent</name>
-    <description>HomeAway's OSS parent pom.</description>
+	<name>HomeAway OSS Parent</name>
+	<description>HomeAway's OSS parent pom.</description>
 
-    <!-- use settings.xml. see: https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
-    <distributionManagement>
-    </distributionManagement>
-    -->
+	<!-- use settings.xml. see: https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide 
+		<distributionManagement> </distributionManagement> -->
 
-    <url>http://homeaway.github.io/oss-parent/</url>
+	<url>http://homeaway.github.io/oss-parent/</url>
 
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
-    <developers>
-        <developer>
-            <id>trhodes</id>
-            <name>Tyler Rhodes</name>
-            <email>trhodes@homeaway.com</email>
-            <organization>HomeAway</organization>
-            <timezone>-6</timezone>
-        </developer>
-    </developers>
+	<developers>
+		<developer>
+			<id>trhodes</id>
+			<name>Tyler Rhodes</name>
+			<email>trhodes@homeaway.com</email>
+			<organization>HomeAway</organization>
+			<timezone>-6</timezone>
+		</developer>
+	</developers>
 
-    <scm>
-        <connection>scm:git:git@github.com:homeaway/oss-parent.git</connection>
-        <developerConnection>scm:git:git@github.com:homeaway/oss-parent.git</developerConnection>
-        <url>git@github.com:homeaway/oss-parent.git</url>
-    </scm>
+	<scm>
+		<connection>scm:git:git@github.com:homeaway/oss-parent.git</connection>
+		<developerConnection>scm:git:git@github.com:homeaway/oss-parent.git</developerConnection>
+		<url>git@github.com:homeaway/oss-parent.git</url>
+	</scm>
 
-    <properties>
-        <github.global.server>github</github.global.server>
+	<properties>
+		<github.global.server>github</github.global.server>
 
-        <sourceVersion>1.6</sourceVersion>
-        <targetVersion>1.6</targetVersion>
-    </properties>
+		<sourceVersion>1.8</sourceVersion>
+		<targetVersion>1.8</targetVersion>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>${sourceVersion}</source>
-                    <target>${targetVersion}</target>
-                </configuration>
-            </plugin>
+		<compiler.pluginVersion>3.8.0</compiler.pluginVersion>
+		<site.pluginVersion>3.7.1</site.pluginVersion>
+		<deploy.pluginVersion>2.8.2</deploy.pluginVersion>
+		<clean.pluginVersion>3.1.0</clean.pluginVersion>
+		<install.pluginVersion>2.5.2</install.pluginVersion>
+		<enforcer.pluginVersion>1.4.2</enforcer.pluginVersion>
+		<githubSite.pluginVersion>0.12</githubSite.pluginVersion>
+	</properties>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.0</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.doxia</groupId>
-                        <artifactId>doxia-module-markdown</artifactId>
-                        <version>1.3</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
+	<build>
+		<pluginManagement>
+			<plugins>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>2.7</version>
-            </plugin>
+				<plugin>
+					<groupId>com.github.github</groupId>
+					<artifactId>site-maven-plugin</artifactId>
+					<version>${githubSite.pluginVersion}</version>
+					<configuration>
+						<message>Creating site for ${project.version}</message>
+					</configuration>
+					<executions>
+						<execution>
+							<goals>
+								<goal>site</goal>
+							</goals>
+							<phase>site-deploy</phase>
+						</execution>
+					</executions>
+				</plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>2.5</version>
-            </plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>${clean.pluginVersion}</version>
+				</plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-install-plugin</artifactId>
-                <version>2.4</version>
-            </plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${compiler.pluginVersion}</version>
+					<configuration>
+						<source>${sourceVersion}</source>
+						<target>${targetVersion}</target>
+					</configuration>
+				</plugin>
 
-            <plugin>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>1.1.1</version>
-                <executions>
-                    <execution>
-                        <id>enforce-plugin-versions</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <requirePluginVersions>
-                                    <message>You MUST always define plugin versions!</message>
-                                    <banLatest>false</banLatest>
-                                    <banRelease>true</banRelease>
-                                    <banSnapshots>false</banSnapshots>
-                                    <phases>clean,test,install,deploy,site-deploy</phases>
-                                </requirePluginVersions>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>${deploy.pluginVersion}</version>
+				</plugin>
 
-            <plugin>
-                <groupId>com.github.github</groupId>
-                <artifactId>site-maven-plugin</artifactId>
-                <version>0.9</version>
-                <configuration>
-                    <message>Creating site for ${project.version}</message>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>site</goal>
-                        </goals>
-                        <phase>site-deploy</phase>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+				<plugin>
+					<artifactId>maven-enforcer-plugin</artifactId>
+					<version>${enforcer.pluginVersion}</version>
+					<executions>
+						<execution>
+							<id>enforce-plugin-versions</id>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<configuration>
+								<rules>
+									<requirePluginVersions>
+										<message>You MUST always define plugin versions!</message>
+										<banLatest>false</banLatest>
+										<banRelease>true</banRelease>
+										<banSnapshots>false</banSnapshots>
+										<phases>clean,test,install,deploy,site-deploy</phases>
+									</requirePluginVersions>
+								</rules>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>${install.pluginVersion}</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>${site.pluginVersion}</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.maven.doxia</groupId>
+							<artifactId>doxia-module-markdown</artifactId>
+							<version>1.3</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>enforce-plugin-versions</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requirePluginVersions>
+									<message>You MUST always define plugin versions!</message>
+									<banLatest>false</banLatest>
+									<banRelease>true</banRelease>
+									<banSnapshots>false</banSnapshots>
+									<phases>clean,test,install,deploy,site-deploy</phases>
+								</requirePluginVersions>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>com.github.github</groupId>
+				<artifactId>site-maven-plugin</artifactId>
+				<configuration>
+					<message>Creating site for ${project.version}</message>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>site</goal>
+						</goals>
+						<phase>site-deploy</phase>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
